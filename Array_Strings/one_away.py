@@ -11,8 +11,42 @@ pale, bae -> false
 """
 from test_utils.helper_functions import verify_output
 
+def oneEditReplace(first,second):
+   found_difference = False
+   for i in range(0,len(first)):
+       if first[i] != second[i]:
+           if found_difference:
+               return False
+          
+           found_difference = True
+   return True
+
+
+def oneEditInsert(first,second):
+    index1 = 0
+    index2 = 0
+    while(index1 < len(first) and index2 < len(second)):
+        if first[index1] != second[index2]:
+            if index1 != index2:
+               return False
+
+            index2 +=1
+        else:
+           index1 +=1
+           index2 +=1
+    
+    return True
+
+
+
 def one_away(first,second):
-    pass
+    if (len(first) == len(second)):
+       return oneEditReplace(first,second)
+    elif (len(first) + 1 == len(second)):
+       return oneEditInsert(first,second)
+    elif (len(first) - 1 == len(second)):
+       return oneEditInsert(second,first)
+    return False
     
 if __name__ == "__main__":
     verify_output(True,one_away("pale","ple"))
