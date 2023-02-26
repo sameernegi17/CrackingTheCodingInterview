@@ -8,7 +8,19 @@ from test_utils.helper_functions import verify_output
 
 
 def string_compression(data):
-    pass
+    data = data + "$"
+    compressedString = ""
+    count = 1
+    for i in range(1,len(data)):
+        if data[i-1] == data[i]:
+            count+=1
+        else:
+            compressedString += data[i-1] + str(count)
+            count = 1
+
+    return compressedString
+
+
 
 
 if __name__ == "__main__":
